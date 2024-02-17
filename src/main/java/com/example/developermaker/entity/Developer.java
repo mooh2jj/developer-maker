@@ -50,4 +50,10 @@ public class Developer extends BaseEntity {
                 .build();
     }
 
+    public void update(DeveloperCreateRequest request) {
+        this.name = request.getName();
+        this.category = request.getCategory();
+        this.type = request.getType();
+        this.experienceYear = request.getExperienceYear();
+    }
 }

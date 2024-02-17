@@ -1,6 +1,7 @@
 package com.example.developermaker.service;
 
 import com.example.developermaker.dto.request.DeveloperCreateRequest;
+import com.example.developermaker.dto.response.DeveloperDetail;
 import com.example.developermaker.dto.response.DeveloperListDto;
 import com.example.developermaker.entity.Developer;
 import com.example.developermaker.repository.DeveloperRepository;
@@ -26,6 +27,14 @@ public class DeveloperServiceImpl implements DeveloperService {
         developerRepository.save(Developer.of(request));
     }
 
+    @Override
+    public DeveloperDetail getDeveloper(Long id) {
+        log.info("getDeveloper run... ");
+        Developer developer = developerRepository.findById(id)
+                .orElseThrow(RuntimeException::new);
+        return DeveloperDetail.of(developer);
+    }
+
     @Transactional(readOnly = true)
     @Override
     public List<DeveloperListDto> getDevelopers() {
@@ -34,5 +43,25 @@ public class DeveloperServiceImpl implements DeveloperService {
         return developerRepository.findAll().stream()
                 .map(DeveloperListDto::of)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Override
+    public void update(Long id, DeveloperCreateRequest request) {
+        log.info("update run");
+        Developer developer = developerRepository.findById(id)
+                .orElseThrow(RuntimeException::new);
+
+        developer.update(request);
+
+    }
+
+    @Transactional
+    @Override
+    public void delete(Long id) {
+        log.info("delete run...");
+        Developer developer = developerRepository.findById(id)
+                .orElseThrow(RuntimeException::new);
+        developerRepository.delete(developer);
     }
 }
