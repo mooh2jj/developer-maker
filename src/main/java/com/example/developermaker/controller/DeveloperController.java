@@ -24,7 +24,7 @@ public class DeveloperController {
     // 리스트 -> 페이징 -> 파라미터 : page-현재페이지넘버, size - 페이지1개당 데이터 갯수
     @GetMapping
     public ResponseEntity<?> getDevelopers(
-            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
 
     ) {

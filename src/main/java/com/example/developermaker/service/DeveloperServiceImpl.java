@@ -54,9 +54,11 @@ public class DeveloperServiceImpl implements DeveloperService {
     public Page<DeveloperListDto> getDevelopers(int page, int size) {
         log.info("getDevelopers run...");
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending()); // 내림차순 : 최신순
-        return developerRepository.findAll(pageable)
+        Pageable pageable = PageRequest.of(page, size); // 내림차순 : 최신순
+        return developerRepository.findList(pageable)
                 .map(DeveloperListDto::of);
+//        return developerRepository.findAll(pageable)
+//                .map(DeveloperListDto::of);
     }
 
     @Transactional
