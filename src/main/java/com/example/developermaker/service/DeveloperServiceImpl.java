@@ -7,6 +7,10 @@ import com.example.developermaker.entity.Developer;
 import com.example.developermaker.repository.DeveloperRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,14 +39,24 @@ public class DeveloperServiceImpl implements DeveloperService {
         return DeveloperDetail.of(developer);
     }
 
+//    @Transactional(readOnly = true)
+//    @Override
+//    public List<DeveloperListDto> getDevelopers() {
+//        log.info("getDevelopers run...");
+//
+//        return developerRepository.findAll().stream()
+//                .map(DeveloperListDto::of)
+//                .collect(Collectors.toList());
+//    }
+
     @Transactional(readOnly = true)
     @Override
-    public List<DeveloperListDto> getDevelopers() {
+    public Page<DeveloperListDto> getDevelopers(int page, int size) {
         log.info("getDevelopers run...");
 
-        return developerRepository.findAll().stream()
-                .map(DeveloperListDto::of)
-                .collect(Collectors.toList());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending()); // 내림차순 : 최신순
+        return developerRepository.findAll(pageable)
+                .map(DeveloperListDto::of);
     }
 
     @Transactional
@@ -52,7 +66,7 @@ public class DeveloperServiceImpl implements DeveloperService {
         Developer developer = developerRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
 
-        developer.update(request);
+        developer.update(request); // dirty checking
 
     }
 
