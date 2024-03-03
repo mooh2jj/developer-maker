@@ -14,7 +14,6 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
-import static com.example.developermaker.entity.QDepartment.*;
 import static com.example.developermaker.entity.QDeveloper.*;
 
 @Slf4j
@@ -32,7 +31,7 @@ public class DeveloperRepositoryCustomImpl implements DeveloperRepositoryCustom 
 
         List<Developer> list = jpaQueryFactory
                 .selectFrom(developer)
-                .leftJoin(developer.department, department).fetchJoin()
+                .leftJoin(developer.department, department).fetchJoin() // 한방쿼리로 만들어놓아서 developer, department를 한번에 조회
                 .where(
                         containsName(name)  // like %d%
 //                                .or(developer.experienceYear.gt(3)) // grater than
@@ -47,6 +46,7 @@ public class DeveloperRepositoryCustomImpl implements DeveloperRepositoryCustom 
         Long totalCount = jpaQueryFactory
                 .select(developer.count())
                 .from(developer)
+                .leftJoin(developer.department, department)
                 .where(
                         containsName(name)
 //                                .or(developer.experienceYear.gt(3)) // grater than

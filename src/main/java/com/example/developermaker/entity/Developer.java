@@ -21,6 +21,9 @@ public class Developer extends BaseEntity {
 
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Department department;
+
     @Column(name = "category")
     @Enumerated(EnumType.STRING)
     private DeveloperCategory category;
@@ -34,16 +37,18 @@ public class Developer extends BaseEntity {
 
     // 빌더 팩토리 패턴
     @Builder
-    public Developer(String name, DeveloperCategory category, DeveloperType type, Integer experienceYear) {
+    public Developer(String name, Department department, DeveloperCategory category, DeveloperType type, Integer experienceYear) {
         this.name = name;
+        this.department = department;
         this.category = category;
         this.type = type;
         this.experienceYear = experienceYear;
     }
 
-    public static Developer of(DeveloperCreateRequest request) {
+    public static Developer of(DeveloperCreateRequest request, Department department) {
         return Developer.builder()
                 .name(request.getName())
+                .department(department)
                 .category(request.getCategory())
                 .type(request.getType())
                 .experienceYear(request.getExperienceYear())

@@ -16,6 +16,8 @@ public class DeveloperListDto {
 
     private String name;
 
+//    private DepartmentListDto department;  // 순환 참조 방지로 주석처리
+
     private DeveloperCategory category;
 
     private DeveloperType type;
@@ -29,6 +31,7 @@ public class DeveloperListDto {
     public static DeveloperListDto of(Developer developer) {
         return DeveloperListDto.builder()
                 .name(developer.getName())
+//                .department(DepartmentListDto.of(developer.getDepartment()))
                 .category(developer.getCategory())
                 .type(developer.getType())
                 .experienceYear(developer.getExperienceYear())

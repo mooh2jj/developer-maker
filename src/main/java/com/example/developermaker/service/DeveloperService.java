@@ -15,4 +15,6 @@ public interface DeveloperService {
 
     void delete(Long id);
 
+    Page<DeveloperListDto> getDevelopersTest(int page, int size, String name);
+
 }

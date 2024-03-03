@@ -24,13 +24,26 @@ public class DeveloperController {
     public ResponseEntity<?> getDevelopers(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam("name") String name
+            @RequestParam(value = "name", required = false) String name
 
     ) {
         Page<DeveloperListDto> listDtos = developerService.getDevelopers(page, size, name);
 
         return new ResponseEntity<>(listDtos, HttpStatus.OK);
     }
+
+    @GetMapping("/test")
+    public ResponseEntity<?> getDevelopersTest(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(value = "name", required = false) String name
+
+    ) {
+        Page<DeveloperListDto> listDtos = developerService.getDevelopersTest(page, size, name);
+
+        return new ResponseEntity<>(listDtos, HttpStatus.OK);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getDeveloper(
