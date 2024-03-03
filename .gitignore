@@ -36,3 +36,9 @@ out/
 ### VS Code ###
 .vscode/
 /src/main/*
+
+
+### application ###
+application-local.yml
+application-dev.yml
+application-prod.yml
