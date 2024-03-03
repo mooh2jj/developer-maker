@@ -5,13 +5,11 @@ import com.example.developermaker.dto.response.DeveloperDetail;
 import com.example.developermaker.dto.response.DeveloperListDto;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
-
 public interface DeveloperService {
     void create(DeveloperCreateRequest request);
     DeveloperDetail getDeveloper(Long id);
 
-    Page<DeveloperListDto> getDevelopers(int page, int size);
+    Page<DeveloperListDto> getDevelopers(int page, int size, String name);
 
     void update(Long id, DeveloperCreateRequest request);
 

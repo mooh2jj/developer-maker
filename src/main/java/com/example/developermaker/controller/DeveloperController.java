@@ -11,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Slf4j
 @RestController // REST api를 처리하는 컨트롤러
 @RequestMapping("/api/developers") // 요청 URL
@@ -25,10 +23,11 @@ public class DeveloperController {
     @GetMapping
     public ResponseEntity<?> getDevelopers(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam("name") String name
 
     ) {
-        Page<DeveloperListDto> listDtos = developerService.getDevelopers(page, size);
+        Page<DeveloperListDto> listDtos = developerService.getDevelopers(page, size, name);
 
         return new ResponseEntity<>(listDtos, HttpStatus.OK);
     }

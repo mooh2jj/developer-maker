@@ -51,11 +51,11 @@ public class DeveloperServiceImpl implements DeveloperService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<DeveloperListDto> getDevelopers(int page, int size) {
+    public Page<DeveloperListDto> getDevelopers(int page, int size, String name) {
         log.info("getDevelopers run...");
 
         Pageable pageable = PageRequest.of(page, size); // 내림차순 : 최신순
-        return developerRepository.findList(pageable)
+        return developerRepository.findList(pageable, name)
                 .map(DeveloperListDto::of);
 //        return developerRepository.findAll(pageable)
 //                .map(DeveloperListDto::of);
