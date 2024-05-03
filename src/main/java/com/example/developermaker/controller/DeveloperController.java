@@ -54,6 +54,7 @@ public class DeveloperController {
         return new ResponseEntity<>(detail, HttpStatus.OK);
     }
 
+    // 개발자 등록
     @PostMapping
     public ResponseEntity<?> createDeveloper(
             @RequestBody DeveloperCreateRequest request

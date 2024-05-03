@@ -18,7 +18,7 @@ public class DeveloperCreateRequest {
 
     private DeveloperCategory category;
 
-    private DeveloperType type;
+//    private DeveloperType type;
 
     private Integer experienceYear;
 

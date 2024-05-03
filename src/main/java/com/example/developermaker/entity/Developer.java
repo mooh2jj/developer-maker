@@ -33,7 +33,7 @@ public class Developer extends BaseEntity {
     private DeveloperType type;
 
     @Column(name = "experience_year")
-    private Integer experienceYear;
+    private Integer experienceYear;     // 경력 년수
 
     // 빌더 팩토리 패턴
     @Builder
@@ -50,7 +50,7 @@ public class Developer extends BaseEntity {
                 .name(request.getName())
                 .department(department)
                 .category(request.getCategory())
-                .type(request.getType())
+                .type(DeveloperType.of(request.getExperienceYear()))
                 .experienceYear(request.getExperienceYear())
                 .build();
     }
@@ -58,7 +58,7 @@ public class Developer extends BaseEntity {
     public void update(DeveloperCreateRequest request) {
         this.name = request.getName();
         this.category = request.getCategory();
-        this.type = request.getType();
+        this.type = DeveloperType.of(request.getExperienceYear());
         this.experienceYear = request.getExperienceYear();
     }
 }
