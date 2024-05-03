@@ -16,13 +16,11 @@ public enum DeveloperType {
 
     // 경력년수에 따른 개발자 타입 지정
     public static DeveloperType of(Integer experienceYear) {
-        if (experienceYear <= 2) {
-            return NEWCOMER;
-        } else if (experienceYear <= 6) {
-            return JUNIOR;
-        } else {
-            return SENIOR;
-        }
+        return switch (experienceYear) {
+            case 1, 2 -> NEWCOMER;
+            case 3, 4, 5, 6 -> JUNIOR;
+            default -> SENIOR;
+        };
     }
 
 }
